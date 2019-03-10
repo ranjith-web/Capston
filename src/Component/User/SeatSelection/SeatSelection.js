@@ -33,7 +33,7 @@ class seatSelection extends Component{
     
 
     render(){
-       
+       console.log("===>", this.props.seatStatus)
         const seatStatus=this.props.seatStatus.map((seat)=>(<Seat booking={this.seatBookingArray} 
         rowstatus={seat.status} key={seat.row}>{seat.row}</Seat>))
         return(

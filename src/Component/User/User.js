@@ -25,27 +25,13 @@ class User extends Component {
     }
   }
     
-  componentDidMount(){
-      // const searchParams = this.props.location.search;
-      // console.log("nextProps===>", this.props)
-      // if(searchParams.indexOf('?token=') != -1 && searchParams.split('?token=')[1]){
-      //   axios.get("/login/authUser", {
-      //     params: {token: searchParams.split('?token=')[1]}
-      //   })
-      //   .then(response => {
-      //       this.props.dispatch(loginUser(response.data));
-      //   })
-      //   .catch(error => {
-      //       throw(error);
-      //   });
-        //nextProps.getUser({token: searchParams.split('?token=')[1]});
-        axios.get('http://localhost:8080/bus/viewBus')
+  componentWillMount(){
+        axios.get('/bus/viewBus')
           .then(response => {
               const busses = response.data.busses;
               this.setState({busses:busses})
           })
           .catch(error => {throw error});
-      //}
     }
     searchBuses=(source,destination,date)=>{
       console.log(source,destination,date)
@@ -92,20 +78,29 @@ class User extends Component {
       }
       console.log('3.',this.state.seatStatus)
       console.log('4',newSeatStatus)
-      axios.put("http://localhost:8080/bus/seatUpdate/" + this.state.busId, {
-            seatStatus:newSeatStatus
-        })
-        .then(response => {
-            
-        })
-        .catch(error => {
-            
-            throw(error);
-        });
+      axios.put("/bus/seatUpdate/" + this.state.busId, {
+          seatStatus:newSeatStatus
+      })
+      .then(response => {
+          
+      })
+      .catch(error => {
+          
+          throw(error);
+      });
+        //mail
+      axios.post("/mail/",{
+        seatBooked:this.state.seatBooked,
+      }).then(response=>console.log("MAIL SENT"))
+      .catch(error=>console.log(error))
 
       console.log(newSeatStatus)
       this.setState({SeatSelection:false})
       this.setState({confirmSeat:false})
+	    //  axios.post("/mail",{
+      //   seatBooked:this.state.seatBooked,
+      // }).then(response=>console.log("MAIL SENT"))
+      // .catch(error=>console.log(error))
       alert('PAYMENT SUCCESSFILL')
     }
     render(){
@@ -136,8 +131,6 @@ class User extends Component {
         )
     }
 }
-
-
 const mapStateToProps = (state) => ({
   "auth" : state.user 
 });

@@ -30,3 +30,11 @@
 .mrg10{
   margin: 10px;
 }
+
+a{
+  color: #fff;
+}
+
+a:hover {
+  color: #fff;
+}

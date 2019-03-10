@@ -21,6 +21,7 @@ var registerRouter = require('./routes/registration');
 var cityRouter = require('./routes/cities')
 var busRouter = require('./routes/busses')
 var oAuthUserRouter = require('./routes/oAuthUsers');
+var mailRouter = require('./routes/mail');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -61,6 +62,7 @@ app.use('/login', usersRouter);
 app.use('/register', registerRouter);
 app.use('/city',cityRouter)
 app.use('/bus',busRouter)
+app.use('/mail', mailRouter)
 
 app.get("*", function(req, res, next){
   res.sendFile(path.join(__dirname, 'build/index.html'))  

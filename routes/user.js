@@ -33,7 +33,6 @@ router.get('/authUser', function(req, res){
             return console.log("got some error");
             //res.redirect('/login');            
         }else{
-            console.log("im innnnnnnnn==========>")
             result.login = "LoggedIn";
             result.user = [userExists];
             res.json(result);
